@@ -53,6 +53,12 @@ Linkedin
 <div class='col-sm-12 '>
 
    <div class='post-detail-item'>{{ instance.get_markdown }}</div>
+    <br>
+
+    {% if instance.user.is_authenticated %}
+    <a href="{% url 'posts:update' slug=instance.slug %}">Edit post</a>
+    {% endif %}
+
 
     <hr/>
     <br/>

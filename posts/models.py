@@ -55,6 +55,7 @@ class Post(models.Model):
 	def get_markdown(self):
 		content = self.content
 		markdown_text = markdown(content)
+		#print("html string markdown text in post models: ", markdown_text)
 		return mark_safe(markdown_text)
 
 	@property
@@ -67,6 +68,7 @@ class Post(models.Model):
 	def get_content_type(self):
 		instance = self
 		content_type = ContentType.objects.get_for_model(instance.__class__)
+		print(content_type)
 		return content_type
 
 	class Meta:
@@ -93,6 +95,7 @@ def pre_save_post_receiver(sender, instance, *args, **kwargs):
     html_string = instance.get_markdown()
     read_time_var = get_read_time(html_string)
     instance.read_time = read_time_var
+    #print("html string in post models: ",html_string)
 
 
 pre_save.connect(pre_save_post_receiver, sender=Post)
